@@ -1,4 +1,5 @@
-blog
-====
+jsbyz
+===
+preparing...please wait.
 
-my blog
+
