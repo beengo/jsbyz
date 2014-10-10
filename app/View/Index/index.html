@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello World  !ds</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>username</th>
+                <th>sign_time</th>
+                <th>sign_type</th>
+            </tr>
+        </thead>
+        <tbody>
+             {foreach $tables as $row}
+                <tr>
+                    <td>{$row.id}</td>
+                    <td>{$row.username}</td>
+                    <td>{$row.sign_time}</td>
+                    <td>{$row.sign_type}</td>
+                </tr>
+             {/foreach}
+        </tbody>
+    </table>
+   
+</body>
+</html>

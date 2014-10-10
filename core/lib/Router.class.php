@@ -2,35 +2,35 @@
 namespace jsbyz;
 
 class Router {
-	static private $controller;
-	static private $action;
-	public function __construct() {
+	static public $controller;
+	static public $action;
+	private function __construct() {
 
 	}
 
 	public function Route() {
-		Router::parse();
+		self::parse();
 		
-		$cont = "\\app\\Controller\\".Router::$controller.'Controller';
-		$act = Router::$action;
+		$cont = "\\app\\Controller\\".self::$controller.'Controller';
+		$act = self::$action;
 		$con = new $cont();
+		$con->$act();
 		
-		if(method_exists($cont, $act)){
-			$con->$act();
-		} else {
-			die($act.' method not exists');
-		}
 	}
 
+	/**
+	* 解析URI参数
+	*/
 	static private function parse() {
+		//var_dump($_SERVER['PATH_TRANSLATED']);
 		if(isset($_SERVER['PATH_TRANSLATED'])) {
 			$uri = str_replace($_SERVER['DOCUMENT_ROOT'].'/', '', $_SERVER['PATH_TRANSLATED']);
 		} else {
 			$uri = 'Index';
 		}
 		$uris = explode('/', rtrim($uri,'/'));
-		Router::$controller = ucfirst($uris[0]);
-		Router::$action = isset($uris[1]) ? ucfirst($uris[1]) : "Index";
+		self::$controller = ucfirst($uris[0]);
+		self::$action = isset($uris[1]) ? strtolower($uris[1]) : "index";
 	}
 
 
