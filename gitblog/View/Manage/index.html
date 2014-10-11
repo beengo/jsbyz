@@ -1,0 +1,78 @@
+{extends file="../base.html"}
+{block name="extensions"}
+<style type="text/css">
+    
+</style>
+{/block}
+{block name="body"}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <button id="check">检测</button>
+            <button id="generate">生成</button>
+        </div>
+        <div class="col-md-6" id="checkResult">
+            
+        </div>
+        <div class="col-md-6">
+           
+                <ul id="postList">
+                    
+                </ul>
+           
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var ready = false;
+        var postlist = undefined;
+        $("#check").click(function(){
+            $.get('manage/check',function(data){
+                var result = eval('('+data+')');
+                var container = $("#checkResult");
+                console.log(result);
+                if(result.index) {
+                    container.append("<p>index.html 存在</p>")
+                }
+                 if(result.post) {
+                    container.append("<p>post.html存在</p>")
+                }
+                var len = result.postlist.length;
+                postlist = result.postlist;
+                container.append('<p>检测到<strong>'+len+'</strong>篇文章');
+                ready = true;
+            });
+        });
+
+        $("#generate").click(function(){
+            if(!ready) {
+                alert('please check first');
+                return;
+            }
+            var obj = $('#postList');
+            obj.append("<li>正在生成 <strong>首页</strong> ...</li>");
+
+            $.get('manage/generate?home',function(data){
+                
+            })
+            generate(0);
+            function generate(index) {
+                if(index < postlist.length) {
+                    obj.append("<li>正在生成 <strong>"+postlist[index].title+"</strong> ...");
+                    $.get('manage/generate?id='+postlist[index].id,function(data){
+                        var result = eval('('+data+')');
+                        if(result.s == true) {
+                            obj.append('已完成</li>');
+                            generate(index+1);
+                        } else {
+                             obj.append('失败</li>');
+                            generate(index+1);
+                        }
+                    })
+                }
+             }
+        })
+    });
+</script>
+{/block}

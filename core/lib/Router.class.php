@@ -11,7 +11,7 @@ class Router {
 	public function Route() {
 		self::parse();
 		
-		$cont = "\\app\\Controller\\".self::$controller.'Controller';
+		$cont = '\\'.APP_NAME.'\\Controller\\'.Router::$controller.'Controller';
 		$act = self::$action;
 		$con = new $cont();
 		$con->$act();

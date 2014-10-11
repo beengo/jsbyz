@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        {foreach $posts as $p}
+            <div>
+                <h2><a href="/jsbyz/index.php/index/edit?id={$p.id}">{$p.title}</a></h2>
+                <div>{$p.content}</div>
+            </div>
+        {/foreach}
+    </div>
+</body>
+</html>

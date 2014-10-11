@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Post</title>
+</head>
+<body>
+    <div class="container">
+        <div>
+        <form method="post">
+            <input type="text" name="title" value="" placeholder="input post title">
+            <select name="category">
+            {foreach $categorys as $category}
+            <option value="{$category.id}">{$category.name}</option>
+            {/foreach}
+            </select>
+            <textarea name="content" placeholder="input post content"></textarea>
+            <input type="submit" value="submit">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

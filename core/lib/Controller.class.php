@@ -11,6 +11,8 @@ class Controller {
         $this->smarty->setCompileDir(APP_PATH.'/Runtime/compile/');
         $this->smarty->setConfigDir(APP_PATH.'/View/configs/');
         $this->smarty->setCacheDir(APP_PATH.'/Runtime/cache/');
+        //静态文件路径
+        $this->smarty->assign('__STATIC__',C('STATIC_PATH'));
     }
 
     protected  function assign($key,$value) {
